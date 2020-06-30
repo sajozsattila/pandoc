@@ -1,10 +1,6 @@
 FROM python:3.6-slim
 
-# the user which run the application
-RUN useradd  mur2
-
-# user home dir
-WORKDIR /home/mur2
+WORKDIR /tmp
 
 # install the necesarry OS applicationa
 #   install LaTeX from source as the OS texlive is ridiculusly old
@@ -16,7 +12,7 @@ COPY texlive.profile ./
 RUN wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
 RUN tar -xzf install-tl-unx.tar.gz
 RUN directory=`ls -d install-tl-2*` && echo $directory && cd $directory \
-        && perl install-tl  --profile=/home/mur2/texlive.profile
+        && perl install-tl  --profile=/tmp/texlive.profile
 RUN echo 'export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH' >> .bashrc
 
 #   install pandoc
