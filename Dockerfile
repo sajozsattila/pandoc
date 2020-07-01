@@ -1,4 +1,5 @@
-FROM python:3.6-slim
+#FROM python:3.6-slim
+FROM ubuntu:18.04
 
 WORKDIR /tmp
 
@@ -20,6 +21,16 @@ RUN wget https://github.com/jgm/pandoc/releases/download/2.9.2.1/pandoc-2.9.2.1-
 RUN dpkg -i pandoc-2.9.2.1-1-amd64.deb
 RUN rm pandoc-2.9.2.1-1-amd64.deb
 RUN apt-get install -y libfontconfig1
+
+# pandoc 
+RUN mkdir -p /opt/pandoc-crossref/bin
+RUN cd /opt/pandoc-crossref/bin
+RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.6.3/pandoc-crossref-Linux-2.9.2.1.tar.xz
+RUN apt-get install -y xz-utils
+RUN unxz pandoc-crossref-Linux-2.9.2.1.tar.xz
+RUN tar -xf pandoc-crossref-Linux-2.9.2.1.tar
+RUN echo "export PATH=/opt/pandoc-crossref/bin:$PATH" >> .bashrc
+
 
 # special package for mur2 
 RUN apt-get install -y gcc 
