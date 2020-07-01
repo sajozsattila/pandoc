@@ -1,11 +1,13 @@
-#FROM python:3.6-slim
-FROM ubuntu:18.04
+FROM python:3.6-slim
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /tmp
 
 # install the necesarry OS applicationa
 #   install LaTeX from source as the OS texlive is ridiculusly old
 RUN apt-get update
+RUN apt-get install -y apt-utils
 RUN apt-get install -y wget
 RUN apt-get -y upgrade perl
 RUN apt-get -y install perl-doc
@@ -28,8 +30,17 @@ RUN cd /opt/pandoc-crossref/bin
 RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.6.3/pandoc-crossref-Linux-2.9.2.1.tar.xz
 RUN apt-get install -y xz-utils
 RUN unxz pandoc-crossref-Linux-2.9.2.1.tar.xz
-RUN tar -xf pandoc-crossref-Linux-2.9.2.1.tar
+RUN mv pandoc-crossref-Linux-2.9.2.1.tar /opt/pandoc-crossref/bin
+RUN cd /opt/pandoc-crossref/bin && tar -xf pandoc-crossref-Linux-2.9.2.1.tar
 RUN echo "export PATH=/opt/pandoc-crossref/bin:$PATH" >> .bashrc
+
+# Libertinus fonts
+RUN apt-get install fontconfig
+RUN wget https://github.com/alif-type/libertinus/releases/download/v6.12/Libertinus-6.12.zip
+RUN apt-get install -y unzip
+RUN unzip Libertinus-6.12.zip
+RUN mv Libertinus-6.12 /usr/share/fonts/opentype
+RUN fc-cache -f -v
 
 
 # special package for mur2 
