@@ -27,7 +27,7 @@ RUN apt-get install -y libfontconfig1
 # pandoc 
 RUN mkdir -p /opt/pandoc-crossref/bin
 RUN cd /opt/pandoc-crossref/bin
-RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.6.3/pandoc-crossref-Linux-2.9.2.1.tar.xz
+RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.6.4/pandoc-crossref-Linux-2.9.2.1.tar.xz
 RUN apt-get install -y xz-utils
 RUN unxz pandoc-crossref-Linux-2.9.2.1.tar.xz
 RUN mv pandoc-crossref-Linux-2.9.2.1.tar /opt/pandoc-crossref/bin
