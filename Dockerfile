@@ -19,15 +19,15 @@ RUN directory=`ls -d install-tl-2*` && echo $directory && cd $directory \
 RUN echo 'export PATH=/usr/local/texlive/2020/bin/x86_64-linux:$PATH' >> .bashrc
 
 #   install pandoc
-RUN wget https://github.com/jgm/pandoc/releases/download/2.10.1/pandoc-2.10.1-1-amd64.deb
-RUN dpkg -i pandoc-2.10.1-1-amd64.deb
-RUN rm pandoc-2.10.1-1-amd64.deb
+RUN wget https://github.com/jgm/pandoc/releases/download/2.11.0.4/pandoc-2.11.0.4-1-amd64.deb
+RUN dpkg -i pandoc-2.11.0.4-1-amd64.deb
+RUN rm pandoc-2.11.0.4-1-amd64.deb
 RUN apt-get install -y libfontconfig1
 
 # pandoc 
 RUN mkdir -p /opt/pandoc-crossref/bin
 WORKDIR /opt/pandoc-crossref/bin
-RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.8.1/pandoc-crossref-Linux.tar.xz
+RUN wget https://github.com/lierdakil/pandoc-crossref/releases/download/v0.3.8.3a/pandoc-crossref-Linux.tar.xz
 RUN apt-get install -y xz-utils
 RUN unxz pandoc-crossref-Linux.tar.xz
 RUN tar -xf pandoc-crossref-Linux.tar
@@ -38,10 +38,10 @@ WORKDIR /tmp
 # Libertinus fonts
 WORKDIR /usr/share/fonts/opentype
 RUN apt-get install fontconfig
-RUN wget https://github.com/alerque/libertinus/releases/download/v7.000/Libertinus-7.000.zip
+RUN wget https://github.com/alerque/libertinus/releases/download/v7.020/Libertinus-7.020.zip
 RUN apt-get install -y unzip
-RUN unzip Libertinus-7.000.zip
-RUN rm Libertinus-7.000.zip
+RUN unzip Libertinus-7.020.zip
+RUN rm Libertinus-7.020.zip
 RUN fc-cache -f -v
 WORKDIR /tmp
 
