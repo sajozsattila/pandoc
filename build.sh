@@ -1,1 +1,1 @@
-docker build -t mur2/pandoc:1.0.8 .
+docker build -t mur2/pandoc:1.0.9 .
