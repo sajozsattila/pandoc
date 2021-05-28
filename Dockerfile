@@ -24,10 +24,13 @@ WORKDIR /tmp
 
 # Libertinus fonts
 WORKDIR /usr/share/fonts/opentype
-RUN apt-get install fontconfig &&  wget https://github.com/alerque/libertinus/releases/download/v7.040/Libertinus-7.040.zip&&  apt-get install -y unzip &&  unzip Libertinus-7.040.zip && rm Libertinus-7.040.zip && fc-cache -f -v
+RUN apt-get -y install fontconfig &&  wget https://github.com/alerque/libertinus/releases/download/v7.040/Libertinus-7.040.zip&&  apt-get install -y unzip &&  unzip Libertinus-7.040.zip && rm Libertinus-7.040.zip && fc-cache -f -v
+
+# Ibarra Real Fonts 
+WORKDIR /usr/share/fonts/truetype
+RUN apt-get -y install git && git clone https://github.com/googlefonts/ibarrareal.git && fc-cache -f -v 
+
 WORKDIR /tmp
-
-
 # special package for mur2 
 RUN apt-get install -y gcc fonts-noto-cjk
 
